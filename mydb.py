@@ -8,7 +8,9 @@ dataBase = mysql.connector.connect(
 )
 
 #prepare a curse object 
-cursorObject = dataBase.cursor()
+cursorObject = dataBase.cursor() 
+#A cursor allows Python to execute SQL queries on the connected database.
+
 
 #create a database 
 cursorObject.execute("CREATE DATABASE myDB")
