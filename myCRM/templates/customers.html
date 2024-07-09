@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Table</title>
+  <!-- Bootstrap CSS (example, adjust as per your setup) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <style>
+    /* Example CSS for customer table customization */
+
+    /* Style the table header */
+    #customer-table thead {
+      background-color: #f2f2f2;
+    }
+
+    #customer-table th {
+      text-align: center;
+    }
+
+    /* Style the table rows */
+    #customer-table tbody tr:hover {
+      background-color: #e9ecef;
+    }
+
+    /* Style the logo column */
+    .customer-logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    /* Responsive table styles (optional) */
+    @media (max-width: 768px) {
+      #customer-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Customers</h1>
+
+    <table id="customer-table" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Logo</th>
+          <th scope="col">Company Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Address</th>
+          <th scope="col">City</th>
+          <th scope="col">Country</th>
+          <th scope="col">Zip Code</th>
+          <th scope="col">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if customers %}
+          {% for customer in customers %}
+            <tr>
+              <td><img src="{{ customer.logo }}" alt="Logo" class="customer-logo"></td>
+              <td>{{ customer.company_name }}</td>
+              <td>{{ customer.email }}</td>
+              <td>{{ customer.phone }}</td>
+              <td>{{ customer.address }}</td>
+              <td>{{ customer.city }}</td>
+              <td>{{ customer.country }}</td>
+              <td>{{ customer.zip_code }}</td>
+              <td>{{ customer.notes }}</td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="9"> No Customer found.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bootstrap JS (example, adjust as per your setup) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+{% endblock %}

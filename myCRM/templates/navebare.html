@@ -7,9 +7,29 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             
-            {% if user.is_authenticated %}  
+            {% if user.is_authenticated %}
               <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-link" href="{% url 'customers' %}">Customers</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'orders' %}">Orders</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'products' %}">Products</a>
+              </li>
+
+              <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shipments' %}">Shipment</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'tasks' %}">Tasks</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contactlogs' %}">Contactlog</a>
               </li>
             
             {% else %}
@@ -26,10 +46,7 @@
 
 
           </ul>
-          <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+
       </div>
   </div>
 </nav>

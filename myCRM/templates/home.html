@@ -2,31 +2,108 @@
 
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
 
-{% if user.is_authenticated %}
-<h1>hello world</h1>
+    {% if user.is_authenticated %}
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Dashboard</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  background-color: #f4f6fc;
+                  margin: 0;
+                  padding: 0;
+              }
+              .dashboard {
+                  display: grid;
+                  grid-template-columns: 1fr 3fr;
+                  grid-gap: 20px;
+                  padding: 20px;
+              }
+              .sidebar {
+                  background-color: #ffffff;
+                  padding: 20px;
+                  border-radius: 10px;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              }
+              .content {
+                  display: grid;
+                  grid-template-rows: auto auto auto;
+                  grid-template-columns: repeat(3, 1fr);
+                  grid-gap: 20px;
+              }
+              .card {
+                  background-color: #ffffff;
+                  padding: 20px;
+                  border-radius: 10px;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              }
+              .full-width {
+                  grid-column: span 3;
+              }
+              h1, h2 {
+                  margin: 0 0 20px;
+              }
+              .chart {
+                  height: 200px;
+                  background-color: #e0e7ff;
+                  border-radius: 10px;
+              }
+          </style>
+      </head>
+      <body>
+              <div class="content">
+                  <div class="card full-width">
+                      <h1>welcome</h1>
+                  </div>
+                  <div class="card">
+                      <h2>Avg of Guests per Stay</h2>
+                      <div class="chart"></div>
+                  </div>
+                  <div class="card">
+                      <h2>Avg of Reservation Cost</h2>
+                      <div class="chart"></div>
+                  </div>
+                  <div class="card">
+                      <h2># Stays per Accommodation Type</h2>
+                      <div class="chart"></div>
+                  </div>
+                  <div class="card full-width">
+                      <h2>Expenditure per Product Line</h2>
+                      <div class="chart"></div>
+                  </div>
+                  <div class="card full-width">
+                      <h2>Evolution of Average of Product Lines Expenditure</h2>
+                      <div class="chart"></div>
+                  </div>
+                  <div class="card full-width">
+                      <h2>Guests per Room Type</h2>
+                      <div class="chart"></div>
+                  </div>
+          </div>
+      </body>
+      </html>
+    {% else %}
 
-{% else %}
-
-<h1>Login</h1>
-<br>
-<form method="post" action="{% url 'home' %}">
-    {% csrf_token %}
-    <form>
-        <div class="mb-3">
-          <input type="text" class="form-control" name="username" , placeholder="Username" required>
-        </div>
-          <div class="mb-3">
-          <input type="password" class="form-control" name="password", placeholder="Password" required>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Login</button>
+      <h1>Login</h1>
+      <br>
+      <form method="post" action="{% url 'home' %}">
+          {% csrf_token %}
+              <div class="mb-3">
+                <input type="text" class="form-control" name="username" , placeholder="Username" required>
+              </div>
+                <div class="mb-3">
+                <input type="password" class="form-control" name="password", placeholder="Password" required>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary">Login</button>
       </form>
-</form>
 
-</div>
+      </div>
 
-{% endif %}
+    {% endif %}
 
 {% endblock %}

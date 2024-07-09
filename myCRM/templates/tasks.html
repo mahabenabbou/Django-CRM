@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks</title>
+  <!-- Bootstrap CSS (example, adjust as per your setup) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <style>
+    /* Example CSS for customer table customization */
+
+    /* Style the table header */
+    #customer-table thead {
+      background-color: #f2f2f2;
+    }
+
+    #customer-table th {
+      text-align: center;
+    }
+
+    /* Style the table rows */
+    #customer-table tbody tr:hover {
+      background-color: #e9ecef;
+    }
+
+    /* Style the logo column */
+    .customer-logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    /* Responsive table styles (optional) */
+    @media (max-width: 768px) {
+      #customer-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tasks</h1>
+
+    <table id="customer-table" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Created At</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Assigned_To</th>
+          <th scope="col">Due Date</th>
+          <th scope="col">status</th>
+          <th scope="col">Priority</th>
+          <th scope="col">Created by</th>
+          <th scope="col">Updated by</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if tasks %}
+          {% for task in tasks %}
+            <tr>
+              <td>{{ customer.created_at }}</td>
+              <td>{{ customer.title }}</td>
+              <td>{{ customer.description }}</td>
+              <td>{{ customer.assigned_to }}</td>
+              <td>{{ customer.due_date }}</td>
+              <td>{{ customer.status }}</td>
+              <td>{{ customer.priority}}</td>
+              <td>{{ customer.created_by }}</td>
+              <td>{{ customer.updated_by }}</td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="9"> No task found.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bootstrap JS (example, adjust as per your setup) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+{% endblock %}

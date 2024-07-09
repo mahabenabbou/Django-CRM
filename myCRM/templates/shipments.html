@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Table</title>
+  <!-- Bootstrap CSS (example, adjust as per your setup) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <style>
+    /* Example CSS for customer table customization */
+
+    /* Style the table header */
+    #customer-table thead {
+      background-color: #f2f2f2;
+    }
+
+    #customer-table th {
+      text-align: center;
+    }
+
+    /* Style the table rows */
+    #customer-table tbody tr:hover {
+      background-color: #e9ecef;
+    }
+
+    /* Style the logo column */
+    .customer-logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    /* Responsive table styles (optional) */
+    @media (max-width: 768px) {
+      #customer-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Shipment</h1>
+
+    <table id="customer-table" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Order</th>
+          <th scope="col">Shipment Date</th>
+          <th scope="col">Tracking Number</th>
+          <th scope="col">carrier</th>
+          <th scope="col">status</th>
+          <th scope="col">Special File</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if shipments %}
+          {% for shipment in shipments %}
+            <tr>
+              <td>{{ shipment.order }}</td>
+              <td>{{ shipment.shipment_date }}</td>
+              <td>{{ shipment.tracking_number }}</td>
+              <td>{{ shipment.carrier }}</td>
+              <td>{{ shipment.status }}</td>
+              <td>{{ shipment.special_file}}</td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="9"> No shipment.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bootstrap JS (example, adjust as per your setup) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+{% endblock %}
