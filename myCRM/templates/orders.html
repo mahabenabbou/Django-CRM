@@ -1,53 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+  body {
+      font-family: Arial, sans-serif;  /* Light orange background */
+      margin: 0;
+      padding: 0;
+  }
+  
+  .text-custom2 {
+      color: rgb(1, 1, 50); /* Dark blue text color */
+  }
+  
+  .buttons-custom2 {
+      background-color: rgb(1, 1, 50); /* Dark blue background */
+      color: #ffffff; /* White text color */
+  }
 
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Table</title>
-    <!-- Bootstrap CSS (example, adjust as per your setup) -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
-    <style>
-      /* Example CSS for customer table customization */
+  .table-custom {
+      font-family: Arial, sans-serif;
+      background-color: rgb(1, 1, 50); /* Dark blue background */
+      color: #ffffff; /* White text color */
+      margin: 0;
+      padding: 0;
+      border-collapse: collapse; /* Ensure borders are collapsed */
+      width: 100%; /* Make table width 100% of its container */
+  }
+  
+  .table-custom th, .table-custom td {
+      border: 1px solid #dddddd; /* Light grey border for cells */
+      padding: 8px; /* Padding inside cells */
+      text-align: left; /* Align text to the left */
+  }
+  
+  .table-custom th {
+      background-color: rgb(0, 0, 50); /* Darker blue for header */
+      color: #ffffff; /* White text color for header */
+  }
+  
+  .table-custom tr:nth-child(even) {
+      background-color: rgb(20, 20, 60); /* Slightly lighter blue for even rows */
+  }
+  
+  .table-custom tr:hover {
+      background-color: rgb(30, 30, 70); /* Hover effect for rows */
+  }
+  .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  }
 
-      /* Style the table header */
-      #customer-table thead {
-        background-color: #f2f2f2;
-      }
 
-      #customer-table th {
-        text-align: center;
-      }
+  </style>
 
-      /* Style the table rows */
-      #customer-table tbody tr:hover {
-        background-color: #e9ecef;
-      }
+<h1 class="header">
+  <a class="navbar-brand text-custom2" href="{% url 'orders' %}">Orders</a>
+  <a href="{% url 'add' %}" class="btn buttons-custom2 me-3">Add</a>
+</h1>
 
-      /* Style the logo column */
-      .customer-logo {
-        width: 50px;
-        height: 50px;
-      }
-
-      /* Responsive table styles (optional) */
-      @media (max-width: 768px) {
-        #customer-table {
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Orders</h1>
-
-      <table id="customer-table" class="table table-bordered table-striped">
+<table id="Order-table" class="table table-bordered table-striped table-custom  ">
         <thead>
           <tr>
             <th scope="col">Customer</th>
@@ -63,7 +75,7 @@
           {% if orders %}
             {% for order in orders %}
               <tr>
-                  <td>{{ order.customer }}</td>
+                  <td><a class="text-custom" href="{% url 'moreinfo' order.id %}">{{ order.customer.company_name }}</a></td>
                   <td>{{ order.order_date }}</td>
                   <td>{{ order.delivery_date }}</td>
                   <td>{{ order.status }}</td>
@@ -78,11 +90,5 @@
           {% endif %}
         </tbody>
       </table>
-    </div>
-
-    <!-- Bootstrap JS (example, adjust as per your setup) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
-  </html>
 
 {% endblock %}

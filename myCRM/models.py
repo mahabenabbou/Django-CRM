@@ -1,8 +1,5 @@
 from django.db import models
-
 from django.contrib.auth.models import User
-
-
 
 
 class Customer(models.Model):
@@ -14,10 +11,12 @@ class Customer(models.Model):
     country = models.CharField(max_length=50)
     zip_code = models.CharField(max_length=10)  # Changement en CharField pour plus de flexibilité
     notes = models.TextField(blank=True, null=True)
-    logo = models.ImageField(blank=True , null = True)
+    logo = models.ImageField(upload_to='logos/', blank=True, null=True)
 
     def _str_(self):
-        return self.company_name
+        return f'{self.company_name}'
+
+
 
 class Order(models.Model):
     PENDING = 'Pending'

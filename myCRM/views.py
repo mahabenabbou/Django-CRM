@@ -1,8 +1,11 @@
 from django.shortcuts import render,  redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm,AddOrderForm
 from .models import Customer,Order,Product,OrderItem,Shipment,Task,ContactLog
+from datetime import datetime
+
 
 # Create your views here.
 
@@ -70,3 +73,53 @@ def tasks(request):
 def contactlogs(request):
     contactlogs = ContactLog.objects.all()
     return render(request,"contactlogs.html", {'contactlogs':contactlogs})
+
+def moreinfo(request,pk):
+    if request.user.is_authenticated:
+        moreinfo=Order.objects.get(id=pk)
+        return render(request , 'moreinfo.html' , {'moreinfo': moreinfo})
+    else:
+        messages.success(request,"you must be logged in to view that page")
+        return redirect('home')
+
+def delete(request,pk):
+    if request.user.is_authenticated:
+        delete_it=Order.objects.get(id=pk)
+        delete_it.delete()
+        messages.success(request,"Order Deleted Successfully !")
+        return redirect('orders')
+    else:
+        messages.success(request,"You Must LogIn First  !")
+        return redirect('home')
+    
+def add(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = AddOrderForm(request.POST, request.FILES)
+            if form.is_valid():
+                order = form.save(commit=False)
+                order.user = request.user
+                order.order_date = datetime.now()  # Set the order date to the current date and time
+                order.save()
+                messages.success(request, "Order Added Successfully!")
+                return redirect('orders')
+        else:
+            form = AddOrderForm()
+        
+        return render(request, "add.html", {'form': form})
+    else:
+        messages.success(request, "You must be logged in first!")
+        return redirect('home')
+    
+def update(request, pk):
+    if request.user.is_authenticated:
+        current_order = Order.objects.get(id=pk)
+        form = AddOrderForm(request.POST or None, instance=current_order)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Record Has Been Updated!")
+            return redirect('orders')
+        return render(request, "update.html", {'form': form, 'pk': pk})
+    else:
+        messages.warning(request, "You must be logged in.")
+        return redirect('home')

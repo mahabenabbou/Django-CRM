@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Order,Customer
 
 class SignUpForm(UserCreationForm):
     email= forms.EmailField(label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email Address'}))
@@ -29,4 +30,14 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	
 
-         
+
+
+class AddOrderForm(forms.ModelForm):
+    customer = forms.ModelChoiceField(queryset=Customer.objects.all(),required=True,widget=forms.Select(attrs={"class": "form-control"}),label="")
+    delivery_date = forms.DateField(required=True,widget=forms.widgets.DateInput(attrs={"placeholder":"Delevery Date","class":"form-control"}),label="")
+    status = forms.ChoiceField(choices=Order.STATUS_CHOICES,required=True,widget=forms.Select(attrs={"class": "form-control"}),label="")
+    total_amount =forms.DecimalField(required=True,widget=forms.widgets.NumberInput(attrs={"placeholder":"Total Amount","class":"form-control"}),label="")
+    special_file = forms.FileField(required=False,widget=forms.widgets.ClearableFileInput(attrs={"class": "form-control"}),label="")
+    class Meta:
+        model = Order
+        exclude = ("user","order_date")

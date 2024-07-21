@@ -1,52 +1,56 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+{% load static %}
+<style>
+.navbar-custom {
+    background-color: rgb(1, 1, 50); /* Transparent background */
+    border: 4px solid rgb(1, 1, 50); /* Blue border */
+    color: rgb(218, 109, 6); /* Dark blue text color */
+  }
+  
+  .buttons-custom {
+    background-color: rgb(1, 1, 50); /* Transparent background */
+    border: 2px solid rgb(218, 109, 6); /* Blue border */
+    color: rgb(218, 109, 6);
+  }
+  .text-custom {
+    color: rgb(218, 109, 6); /* Dark blue text color */
+  }
+
+</style>
+
+
+
+
+<nav class="navbar navbar-custom navbar-expand-lg   ">
   <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">LogiTrack</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            
-            {% if user.is_authenticated %}
-              <li class="nav-item">
-                    <a class="nav-link" href="{% url 'customers' %}">Customers</a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'orders' %}">Orders</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'products' %}">Products</a>
-              </li>
-
-              <li class="nav-item">
-                    <a class="nav-link" href="{% url 'shipments' %}">Shipment</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'tasks' %}">Tasks</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'contactlogs' %}">Contactlog</a>
-              </li>
-            
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'home' %}">Login</a>
-              </li>
-            
-            
-            {% endif %}
-
-
-
-          </ul>
-
-      </div>
+    <a class="navbar-brand " href="{% url 'home' %}">
+      <img src="{% static 'images/logitrack.png' %}" alt="Logo" style="width: 150px; height: 60px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+          <a href="{% url 'customers' %}" class="btn buttons-custom me-3">Customers</a>
+          
+            <a href="{% url 'orders' %}" class="btn buttons-custom me-3">Orders</a>
+          
+            <a href="{% url 'products' %}" class="btn buttons-custom me-3">Products</a>
+          
+            <a href="{% url 'shipments' %}" class="btn buttons-custom me-3">Shipments</a>
+          
+            <a href="{% url 'tasks' %}" class="btn buttons-custom me-3">Tasks</a>
+          
+            <a href="{% url 'contactlogs' %}" class="btn buttons-custom me-3">Contactlog</a>
+          
+            <a href="{% url 'logout' %}" class="btn buttons-custom me-3">Logout</a>
+        {% else %}
+          
+            <a href="{% url 'register' %}" class="btn buttons-custom me-3">Register</a>
+          
+            <a href="{% url 'home' %}" class="btn buttons-custom me-3" >Login</a>
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>

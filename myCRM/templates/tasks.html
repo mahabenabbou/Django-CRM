@@ -1,53 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tasks</title>
-  <!-- Bootstrap CSS (example, adjust as per your setup) -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+  body {
+      font-family: Arial, sans-serif; 
+      margin: 0;
+      padding: 0;
+  }
   
-  <style>
-    /* Example CSS for customer table customization */
-
-    /* Style the table header */
-    #customer-table thead {
-      background-color: #f2f2f2;
-    }
-
-    #customer-table th {
-      text-align: center;
-    }
-
-    /* Style the table rows */
-    #customer-table tbody tr:hover {
-      background-color: #e9ecef;
-    }
-
-    /* Style the logo column */
-    .customer-logo {
-      width: 50px;
-      height: 50px;
-    }
-
-    /* Responsive table styles (optional) */
-    @media (max-width: 768px) {
-      #customer-table {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-    }
+  .text-custom2 {
+      color: rgb(1, 1, 50); /* Dark blue text color */
+  }
+  
+  .table-custom {
+      font-family: Arial, sans-serif;
+      background-color: rgb(1, 1, 50); /* Dark blue background */
+      color: #ffffff; /* White text color */
+      margin: 0;
+      padding: 0;
+      border-collapse: collapse; /* Ensure borders are collapsed */
+      width: 100%; /* Make table width 100% of its container */
+  }
+  
+  .table-custom th, .table-custom td {
+      border: 1px solid #dddddd; /* Light grey border for cells */
+      padding: 8px; /* Padding inside cells */
+      text-align: left; /* Align text to the left */
+  }
+  
+  .table-custom th {
+      background-color: rgb(0, 0, 50); /* Darker blue for header */
+      color: #ffffff; /* White text color for header */
+  }
+  
+  .table-custom tr:nth-child(even) {
+      background-color: rgb(20, 20, 60); /* Slightly lighter blue for even rows */
+  }
+  
+  .table-custom tr:hover {
+      background-color: rgb(30, 30, 70); /* Hover effect for rows */
+  }
   </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Tasks</h1>
 
-    <table id="customer-table" class="table table-bordered table-striped">
+
+<h1>
+  <a class="navbar-brand text-custom2" href="{% url 'tasks' %}">Tasks</a>
+  </h1>
+
+    <table id="task" class="table table-bordered table-striped table-custom">
       <thead>
         <tr>
           <th scope="col">Created At</th>
@@ -65,15 +65,15 @@
         {% if tasks %}
           {% for task in tasks %}
             <tr>
-              <td>{{ customer.created_at }}</td>
-              <td>{{ customer.title }}</td>
-              <td>{{ customer.description }}</td>
-              <td>{{ customer.assigned_to }}</td>
-              <td>{{ customer.due_date }}</td>
-              <td>{{ customer.status }}</td>
-              <td>{{ customer.priority}}</td>
-              <td>{{ customer.created_by }}</td>
-              <td>{{ customer.updated_by }}</td>
+              <td>{{ task.created_at }}</td>
+              <td>{{ task.title }}</td>
+              <td>{{ task.description }}</td>
+              <td>{{ task.assigned_to }}</td>
+              <td>{{ task.due_date }}</td>
+              <td>{{ task.status }}</td>
+              <td>{{ task.priority}}</td>
+              <td>{{ task.created_by }}</td>
+              <td>{{ task.updated_by }}</td>
             </tr>
           {% endfor %}
         {% else %}
@@ -83,12 +83,6 @@
         {% endif %}
       </tbody>
     </table>
-  </div>
-
-  <!-- Bootstrap JS (example, adjust as per your setup) -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
 
 
 {% endblock %}

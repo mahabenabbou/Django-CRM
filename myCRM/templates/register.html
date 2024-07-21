@@ -1,29 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+<style>
+    body {
+                font-family: Arial, sans-serif;
+                background-color: rgb(1, 1, 50);
+                margin: 0;
+                padding: 0;
+            }
+    .text-custom {
+                color: rgb(218, 109, 6); /* Dark blue text color */
+            }
+    .buttons-custom {
+                background-color: rgb(1, 1, 50); /* Transparent background */
+                border: 2px solid rgb(218, 109, 6); /* Blue border */
+                color: rgb(218, 109, 6);
+            }
+    
+</style>
 
-<div class="col-md-6 offset-md-3">
-<h1>Register</h1>
-<br/>
-
-<form method="post" action="">
-    {% csrf_token %}
-    {% if form.errors %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        Your From Has errors
-        {% for field in form %}
-            {% if field.errors %}
-                {{ field.errors }}
-            {% endif %}
-        {% endfor %}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <img src="{% static 'images/logitrack.png' %}" class="img-fluid" alt="Welcome Image">
         </div>
-    {% endif %}
-    {{ form.as_p }}
-    <br>
-        <button type="submit" class="btn btn-primary">Register</button>
-      </form>
 
+        <div class="col-md-6">
+            <a class="navbar-brand text-custom" href="{% url 'register' %}">
+                <h1>Register</h1>
+            </a>
+            <br/>
 
+            <form method="post" action="">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        Your form has errors
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {{ field.errors }}
+                            {% endif %}
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+                {{ form.as_p }}
+                <br>
+                <button type="submit" class="btn buttons-custom me-3">Register</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
