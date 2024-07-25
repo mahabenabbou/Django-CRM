@@ -23,23 +23,23 @@
   
 </style>
 
+
 <div class="card card-costum">
     <div class="card-header">
-        <h5><strong>Company : {{ moreinfo.customer.company_name }}</strong><br/>
-        Order ID : {{ moreinfo.id }}<br/></h5>
+        <h5><strong>tracking_number : {{ moreinfoShipment.tracking_number }}</strong><br/>
+          carrier : {{ moreinfoShipment.carrier }}<br/></h5>
     </div>
     <div class="card-body">
       <p class="card-title">
-        <strong>Order Date</strong> : {{ moreinfo.order_date }}<br/>
-        <strong>Delivery Date</strong> : {{ moreinfo.delivery_date }}<br/>
-        <strong>Status :</strong> {{ moreinfo.status }}<br/>
-        <strong>Total Amount</strong> : {{ moreinfo.total_amount }}<br/>
-        <strong>Special File</strong> : {{ moreinfo.special_file }}<br/>
+        <strong>order</strong> : {{ moreinfoShipment.order }}<br/>
+        <strong>shipment_date</strong> : {{ moreinfoShipment.shipment_date }}<br/>
+        <strong>Status :</strong> {{ moreinfoShipment.status }}<br/>
+        <strong>Special File</strong> : {{ moreinfoShipment.special_file }}<br/>
       </p>
       <br/>
-      <a href="{% url 'orders' %}" class="btn buttons-custom">Back</a>
-      <a href="{% url 'delete' moreinfo.id %}" class="btn buttons-custom">Delete</a>
-      <a href="{% url 'update' moreinfo.id %}" class="btn buttons-custom">Update</a>
+      <a href="{% url 'shipments' %}" class="btn buttons-custom">Back</a>
+      <a href="{% url 'deleteShipment' moreinfoShipment.id %}" class="btn buttons-custom">Delete</a>
+      <a href="{% url 'updateShipment' moreinfoShipment.id %}" class="btn buttons-custom">Update</a>
       
 
     </div>

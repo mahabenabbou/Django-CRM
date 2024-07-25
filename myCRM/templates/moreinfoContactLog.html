@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+          }
+  .card-costum{
+              color: rgb(218, 109, 6);
+              background-color: rgb(1, 1, 50);
+              line-height:  3cap;
+              
+  }
+  .text-custom {
+              color: rgb(218, 109, 6); /* Dark blue text color */
+          }
+  .buttons-custom {
+              background-color: rgb(1, 1, 50); /* Transparent background */
+              border: 2px solid rgb(218, 109, 6); /* Blue border */
+              color: rgb(218, 109, 6);
+          }
+  
+</style>
+
+
+<div class="card card-costum">
+    <div class="card-header">
+        <h5><strong>customer : {{ moreinfoContactLog.customer }}</strong><br/>
+            contact_date  : {{ moreinfoContactLog.contact_date  }}<br/></h5>
+    </div>
+    <div class="card-body">
+      <p class="card-title">
+        <strong>contact_method</strong> : {{ moreinfoContactLog.contact_method }}<br/>
+        <strong>notes</strong> : {{ moreinfoContactLog.notes}}<br/>
+        <strong>created_by</strong> {{ moreinfoContactLog.created_by }}<br/>
+        <strong>updated_by</strong> : {{ moreinfoContactLog.updated_by }}<br/>
+      </p>
+      <br/>
+      <a href="{% url 'contactlogs' %}" class="btn buttons-custom">Back</a>
+      <a href="{% url 'deleteContactLog' moreinfoContactLog.id %}" class="btn buttons-custom">Delete</a>
+      <a href="{% url 'updateContactLog' moreinfoContactLog.id %}" class="btn buttons-custom">Update</a>
+      
+
+    </div>
+</div>
+
+
+                
+                
+{% endblock %}

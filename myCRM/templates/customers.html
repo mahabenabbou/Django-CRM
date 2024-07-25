@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 <style>
   body {
       font-family: Arial, sans-serif; 
       margin: 0;
       padding: 0;
   }
-  
+  .buttons-custom2 {
+      background-color: rgb(1, 1, 50); /* Dark blue background */
+      color: #ffffff; /* White text color */
+  }
   .text-custom2 {
       color: rgb(1, 1, 50); /* Dark blue text color */
   }
@@ -40,11 +44,20 @@
   .table-custom tr:hover {
       background-color: rgb(30, 30, 70); /* Hover effect for rows */
   }
+  .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  }
+
+
   </style>
 
-  
-      <h1>
+<h1 class="header">
       <a class="navbar-brand text-custom2" href="{% url 'customers' %}">Customers</a>
+      {% if user.is_authenticated and user.is_staff %}
+        <a href="{% url 'addProduct' %}" class="btn buttons-custom2 me-3">Add</a>
+      {% endif %}
       </h1>
     
       
@@ -68,7 +81,7 @@
         {% for customer in customers %}
           <tr>
             <td>{{ customer.id }}</td>
-            <td><img src="{{ customer.logo.url }}" alt="Logo" style="width: 100px; height: 80px;"></td>
+            <td><img src="{{ customer.logo.url }}" alt="Logo" style="width: 120px; height: 70px;"></td>
             <td>{{ customer.company_name }}</td>
             <td>{{ customer.email }}</td>
             <td>{{ customer.phone }}</td>

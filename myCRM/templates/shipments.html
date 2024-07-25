@@ -12,6 +12,10 @@
       color: rgb(1, 1, 50); /* Dark blue text color */
   }
   
+  .buttons-custom2 {
+      background-color: rgb(1, 1, 50); /* Dark blue background */
+      color: #ffffff; /* White text color */
+  }
   .table-custom {
       font-family: Arial, sans-serif;
       background-color: rgb(1, 1, 50); /* Dark blue background */
@@ -40,9 +44,19 @@
   .table-custom tr:hover {
       background-color: rgb(30, 30, 70); /* Hover effect for rows */
   }
+  .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  }
+
   </style>
-<h1>
+
+
+<h1 class="header">
   <a class="navbar-brand text-custom2" href="{% url 'shipments' %}">Shipment</a>
+  <a href="{% url 'addShipment' %}" class="btn buttons-custom2 me-3">Add</a>
+
   </h1>
 
     <table id="shipment-table" class="table table-bordered table-striped table-custom">
@@ -60,7 +74,7 @@
         {% if shipments %}
           {% for shipment in shipments %}
             <tr>
-              <td>{{ shipment.order }}</td>
+              <td><a class="text-custom" href="{% url 'moreinfoShipment' shipment.id %}">{{ shipment.order }}</a></td>
               <td>{{ shipment.shipment_date }}</td>
               <td>{{ shipment.tracking_number }}</td>
               <td>{{ shipment.carrier }}</td>

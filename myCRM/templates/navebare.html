@@ -7,9 +7,9 @@
   }
   
   .buttons-custom {
-    background-color: rgb(1, 1, 50); /* Transparent background */
-    border: 2px solid rgb(218, 109, 6); /* Blue border */
-    color: rgb(218, 109, 6);
+            background-color: rgb(1, 1, 50); /* Transparent background */
+            border: 2px solid rgb(1, 1, 50); /* Blue border */
+            color: rgb(245, 245, 245);
   }
   .text-custom {
     color: rgb(218, 109, 6); /* Dark blue text color */
@@ -42,6 +42,8 @@
             <a href="{% url 'tasks' %}" class="btn buttons-custom me-3">Tasks</a>
           
             <a href="{% url 'contactlogs' %}" class="btn buttons-custom me-3">Contactlog</a>
+
+            <a href="{% url 'orderitems' %}" class="btn buttons-custom me-3">Order Item</a>
           
             <a href="{% url 'logout' %}" class="btn buttons-custom me-3">Logout</a>
         {% else %}

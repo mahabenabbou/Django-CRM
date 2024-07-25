@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 <style>
   body {
-      font-family: Arial, sans-serif; 
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
   }
@@ -12,6 +13,11 @@
       color: rgb(1, 1, 50); /* Dark blue text color */
   }
   
+  .buttons-custom2 {
+      background-color: rgb(1, 1, 50); /* Dark blue background */
+      color: #ffffff; /* White text color */
+  }
+
   .table-custom {
       font-family: Arial, sans-serif;
       background-color: rgb(1, 1, 50); /* Dark blue background */
@@ -40,42 +46,54 @@
   .table-custom tr:hover {
       background-color: rgb(30, 30, 70); /* Hover effect for rows */
   }
-  </style>
+  
+  .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+</style>
 
-</head>
-<body>
-  <div class="container">
-    <h1>
-      <a class="navbar-brand text-custom2" href="{% url 'products' %}">Products</a>
-      </h1>
+<h1 class="header">
+    <a class="navbar-brand text-custom2" href="{% url 'products' %}">Products</a>
+    {% if user.is_authenticated and user.is_staff %}
+        <a href="{% url 'addProduct' %}" class="btn buttons-custom2 me-3">Add</a>
+    {% endif %}
+</h1>
 
-    <table id="product-table" class="table table-bordered table-striped table-custom ">
-      <thead>
+<table id="product-table" class="table table-bordered table-striped table-custom">
+    <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Price</th>
-          <th scope="col">Stock</th>
-          <th scope="col">Picture</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Picture</th>
         </tr>
-      </thead>
-      <tbody>
+    </thead>
+    <tbody>
         {% if products %}
-          {% for product in products %}
-            <tr>
-              <td>{{ product.name }}</td>
-              <td>{{ product.description }}</td>
-              <td>{{ product.price }}</td>
-              <td>{{ product.stock }}</td>
-              <td>{{ product.picture }}</td>
-            </tr>
-          {% endfor %}
+            {% for product in products %}
+                <tr>
+                    <td><a class="text-custom" href="{% url 'moreinfoProduct' product.id %}">{{ product.name }}</a></td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td>
+                        {% if product.picture %}
+                            <img src="{{ product.picture.url }}" alt="..." style="width: 100px; height: 80px;">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
         {% else %}
-          <tr>
-            <td colspan="9"> No Product found.</td>
-          </tr>
+            <tr>
+                <td colspan="5">No Product found.</td>
+            </tr>
         {% endif %}
-      </tbody>
-    </table>
+    </tbody>
+</table>
 
 {% endblock %}

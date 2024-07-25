@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<style>
+  body {
+      font-family: Arial, sans-serif; 
+      margin: 0;
+      padding: 0;
+  }
+  
+  .text-custom2 {
+      color: rgb(1, 1, 50); /* Dark blue text color */
+  }
+  
+  .table-custom {
+      font-family: Arial, sans-serif;
+      background-color: rgb(1, 1, 50); /* Dark blue background */
+      color: #ffffff; /* White text color */
+      margin: 0;
+      padding: 0;
+      border-collapse: collapse; /* Ensure borders are collapsed */
+      width: 100%; /* Make table width 100% of its container */
+  }
+  
+  .table-custom th, .table-custom td {
+      border: 1px solid #dddddd; /* Light grey border for cells */
+      padding: 8px; /* Padding inside cells */
+      text-align: left; /* Align text to the left */
+  }
+  
+  .table-custom th {
+      background-color: rgb(0, 0, 50); /* Darker blue for header */
+      color: #ffffff; /* White text color for header */
+  }
+  
+  .table-custom tr:nth-child(even) {
+      background-color: rgb(20, 20, 60); /* Slightly lighter blue for even rows */
+  }
+  
+  .table-custom tr:hover {
+      background-color: rgb(30, 30, 70); /* Hover effect for rows */
+  }
+  .buttons-custom2 {
+      background-color: rgb(1, 1, 50); /* Dark blue background */
+      color: #ffffff; /* White text color */
+  }
+  .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  }
+
+
+  </style>
+
+<h1 class="header">
+      <a class="navbar-brand text-custom2" href="{% url 'orderitems' %}">orderitems</a>
+        <a href="{% url 'addProduct' %}" class="btn buttons-custom2 me-3">Add</a>
+      </h1>
+    
+      
+  <table id="orderitem-table " class="table table-bordered table-striped table-custom ">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">order</th>
+        <th scope="col">product</th>
+        <th scope="col">quantity</th>
+        <th scope="col">price</th>
+        <th scope="col">special_file</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if orderitems %}
+        {% for orderitem in orderitems %}
+          <tr>
+            <td>{{ orderitem.id }}</td>
+            <td>{{ orderitem.order }}</td>
+            <td>{{ orderitem.product }}</td>
+            <td>{{ orderitem.quantity }}</td>
+            <td>{{ orderitem.price }}</td>
+            <td>{{ orderitem.special_file }}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="10">No orderitem found.</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+{% endblock %}
+
+
+

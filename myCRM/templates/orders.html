@@ -56,7 +56,7 @@
 
 <h1 class="header">
   <a class="navbar-brand text-custom2" href="{% url 'orders' %}">Orders</a>
-  <a href="{% url 'add' %}" class="btn buttons-custom2 me-3">Add</a>
+  <a href="{% url 'addOrder' %}" class="btn buttons-custom2 me-3">Add</a>
 </h1>
 
 <table id="Order-table" class="table table-bordered table-striped table-custom  ">
@@ -68,6 +68,7 @@
             <th scope="col">Status</th>
             <th scope="col">Total Amount</th>
             <th scope="col">Special File</th>  
+            <th scope="col">ID</th>  
             
           </tr>
         </thead>
@@ -75,12 +76,13 @@
           {% if orders %}
             {% for order in orders %}
               <tr>
-                  <td><a class="text-custom" href="{% url 'moreinfo' order.id %}">{{ order.customer.company_name }}</a></td>
+                  <td><a class="text-custom" href="{% url 'moreinfoOrder' order.id %}">{{ order.customer.company_name }}</a></td>
                   <td>{{ order.order_date }}</td>
                   <td>{{ order.delivery_date }}</td>
                   <td>{{ order.status }}</td>
                   <td>{{ order.total_amount }}</td>
                   <td>{{ order.special_file }}</td>
+                  <td>{{ order.id }}</td>
                 </tr>
             {% endfor %}
           {% else %}

@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Order,Customer
+from .models import Order,Customer,Product,Shipment,Task,ContactLog
 
 class SignUpForm(UserCreationForm):
     email= forms.EmailField(label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email Address'}))
@@ -41,3 +41,50 @@ class AddOrderForm(forms.ModelForm):
     class Meta:
         model = Order
         exclude = ("user","order_date")
+
+
+class AddProductForm(forms.ModelForm):
+    name = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Name", "class": "form-control"}), label="")
+    description = forms.CharField(required=False, widget=forms.Textarea(attrs={"placeholder": "Description", "class": "form-control"}), label="")
+    price = forms.DecimalField(required=True, widget=forms.NumberInput(attrs={"placeholder": "Price", "class": "form-control"}), label="")
+    stock = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={"placeholder": "Stock", "class": "form-control"}), label="")
+    picture = forms.ImageField(required=False, widget=forms.FileInput(attrs={"class": "form-control"}), label="")
+
+    class Meta:
+        model = Product
+        exclude = ("user",)
+
+
+class AddShipmentForm(forms.ModelForm):
+    order = forms.ModelChoiceField(queryset=Order.objects.all(),required=True,widget=forms.Select(attrs={"class": "form-control"}),label="")
+    shipment_date = forms.DateField(required=True,widget=forms.widgets.DateInput(attrs={"placeholder":"Shipment Date","class":"form-control"}),label="")
+    tracking_number = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Tracking Number", "class": "form-control"}), label="")
+    carrier = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Carrier", "class": "form-control"}), label="")
+    status = forms.ChoiceField(choices=Shipment.STATUS_CHOICES,required=True,widget=forms.Select(attrs={"class": "form-control"}),label="")
+    special_file = forms.FileField(required=False,widget=forms.widgets.ClearableFileInput(attrs={"class": "form-control"}),label="")
+    class Meta:
+        model = Shipment
+        exclude = ("user",)
+
+
+
+class AddTaskForm(forms.ModelForm):
+    created_at = forms.DateField(required=True,widget=forms.widgets.DateInput(attrs={"placeholder":"Created at","class":"form-control"}),label="")
+    title = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Title", "class": "form-control"}), label="")
+    description = forms.CharField(required=False, widget=forms.Textarea(attrs={"placeholder": "Description", "class": "form-control"}), label="")
+    due_date = forms.DateField(required=True,widget=forms.widgets.DateInput(attrs={"placeholder":"Due Date","class":"form-control"}),label="")
+    status = forms.ChoiceField(choices=Task.STATUS_CHOICES,required=True,widget=forms.Select(attrs={"class": "form-control"}),label="")
+    priority = forms.ChoiceField(choices=Task.PRIORITY_CHOICES,required=True,widget=forms.Select(attrs={"class": "form-control"}),label="")
+
+    class Meta:
+        model = Task
+        exclude = ("user",'created_by', 'updated_by')
+
+class AddContactLogForm(forms.ModelForm):
+    customer = forms.ModelChoiceField(queryset=Customer.objects.all(),required=True,widget=forms.Select(attrs={"class": "form-control"}),label="")
+    contact_date = forms.DateField(required=True,widget=forms.widgets.DateInput(attrs={"placeholder":"contact date","class":"form-control"}),label="")
+    contact_method = forms.ChoiceField(choices=ContactLog.METHOD_CHOICES,required=True,widget=forms.Select(attrs={"class": "form-control"}),label="")
+    notes = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Note", "class": "form-control"}), label="")
+    class Meta:
+        model = ContactLog
+        exclude = ("user",'created_by', 'updated_by')

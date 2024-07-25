@@ -8,11 +8,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Dashboard</title>
       <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
         .content {
             display: grid;
             grid-template-rows: auto auto auto;
@@ -35,45 +30,81 @@
             background-color: #ffffff;
             border-radius: 5px;
         }
+        .buttons-custom {
+            background-color: rgb(1, 1, 50); /* Transparent background */
+            border: 2px solid rgb(1, 1, 50); /* Blue border */
+            color: rgb(245, 245, 245);
+        }
     </style>
       <body>
       <div class="content">                
-                  <div class="card">
-                      <h5>Number of customer</h5>
-                      <div class="chart"></div>
+                  <div class="card ">
+                      <h5>Number of customer : {{ num_customers }}</h5>
+                  </div>
+                  <div class="card ">
+                      <h5>Orders : {{ num_orders }}</h5>
                   </div>
                   <div class="card">
-                      <h5>last mounth imports</h5>
-                      <div class="chart"></div>
+                      <h5>Products: {{ num_products }}</h5>
                   </div>
                   <div class="card">
-                      <h5>hello world</h5>
-                      <div class="chart"></div>
+                      <h5>Shipment : {{ num_shipments }}</h5>
                   </div>
-                  <div class="card full-width">
-                      <h5>Expenditure per Product Line</h5>
-                      <div class="chart"></div>
+                  <div class="card ">
+                    <h5>Tasks non completed : {{num_tasks}}</h5>
                   </div>
-                  <div class="card full-width">
-                      <h5>Evolution of Average of Product Lines Expenditure</h5>
-                      <div class="chart"></div>
-                  </div>
+                  <div class=" full-width">
+                    <h5>Orders Per Month</h5>
+                    <canvas id="ordersPerMonth" class="chart"></canvas>
+                </div>
+            
+                <script>
+                  document.addEventListener("DOMContentLoaded", function() {
+                      const ctx = document.getElementById('ordersPerMonth').getContext('2d');
+                      const data = {
+                          labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"], // Example months
+                          datasets: [{
+                              label: 'Orders Per Month',
+                              data: [10, 20,27,14, 20, 21, 7, ], // Example data
+                              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                              borderColor: 'rgba(75, 192, 192, 1)',
+                              borderWidth: 1
+                          }]
+                      };
+              
+                      const config = {
+                          type: 'bar',
+                          data: data,
+                          options: {
+                              scales: {
+                                  x: {
+                                      beginAtZero: true
+                                  }
+                              }
+                          }
+                      };
+              
+                      new Chart(ctx, config);
+                  });
+              </script>
+              
+                
+
       </div>
+
       </body>
 
       {% else %}
       <style>
-        body {
-                    font-family: Arial, sans-serif;
-                    background-color: rgb(1, 1, 50);
-                    margin: 0;
-                    padding: 0;
-                }
           .text-custom {
                     color: rgb(218, 109, 6); /* Dark blue text color */
                 }
-        
-        </style>
+          .buttons-custom {
+            background-color: rgb(1, 1, 50); /* Transparent background */
+            border: 2px solid rgb(1, 1, 50); /* Blue border */
+            color: rgb(245, 245, 245);
+          }
+      </style>
       <div class="container">
         <br>
         <br>
@@ -97,7 +128,7 @@
                 <input type="password" class="form-control" name="password" placeholder="Password" required>
               </div>
               <br>
-              <button type="submit" class="btn btn-primary">Login</button>
+              <button type="submit" class="btn buttons-custom">Login</button>
             </form>
           </div>
         </div>

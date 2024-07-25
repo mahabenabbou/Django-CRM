@@ -27,9 +27,9 @@
 </style>
 
 <h1>
-<a class="navbar-brand text-custom2" href="{% url 'add' %}">Add New Order</a>
+<a class="navbar-brand text-custom2" href="{% url 'addShipment' %}">Add New Shipment</a>
 </h1>
-<form class="text-custom2" method="POST" action="{% url 'add' %}">
+<form class="text-custom2" method="POST" action="{% url 'addShipment' %}">
     {% csrf_token %}
     {{form.as_p}}
     <br>

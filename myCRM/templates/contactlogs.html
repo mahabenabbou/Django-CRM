@@ -40,40 +40,43 @@
   .table-custom tr:hover {
       background-color: rgb(30, 30, 70); /* Hover effect for rows */
   }
-  </style>
+  .buttons-custom2 {
+      background-color: rgb(1, 1, 50); /* Dark blue background */
+      color: #ffffff; /* White text color */
+  }
+  .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+</style>
 
-  
-      <h1>
+<h1 class="header">
       <a class="navbar-brand text-custom2" href="{% url 'contactlogs' %}">ContactLog</a>
+      <a href="{% url 'addContactLog' %}" class="btn buttons-custom2 me-3">Add</a>
       </h1>
     
 <table id="contactlog-table" class="table table-bordered table-striped table-custom">
       <thead>
         <tr>
-          <th scope="col">Created At</th>
-          <th scope="col">Title</th>
-          <th scope="col">Description</th>
-          <th scope="col">Assigned_To</th>
-          <th scope="col">Due Date</th>
-          <th scope="col">status</th>
-          <th scope="col">Priority</th>
+          <th scope="col">customer</th>
+          <th scope="col">contact_date</th>
+          <th scope="col">contact_method</th>
+          <th scope="col">notes</th>
           <th scope="col">Created by</th>
           <th scope="col">Updated by</th>
         </tr>
       </thead>
       <tbody>
         {% if contactlogs %}
-          {% for contaclog in contaclogs %}
+          {% for contactlog in contactlogs %}
             <tr>
-              <td>{{ contaclog.created_at }}</td>
-              <td>{{ contaclog.title }}</td>
-              <td>{{ contaclog.description }}</td>
-              <td>{{ contaclog.assigned_to }}</td>
-              <td>{{ contaclog.due_date }}</td>
-              <td>{{ contaclog.status }}</td>
-              <td>{{ contaclog.priority}}</td>
-              <td>{{ contaclog.created_by }}</td>
-              <td>{{ contaclog.updated_by }}</td>
+              <td><a class="text-custom" href="{% url 'moreinfoContactLog' contactlog.id %}">{{ contactlog.customer }}</a></td>
+              <td>{{ contactlog.contact_date }}</td>
+              <td>{{ contactlog.contact_method }}</td>
+              <td>{{ contactlog.notes }}</td>
+              <td>{{ contactlog.created_by }}</td>
+              <td>{{ contactlog.updated_by }}</td>
             </tr>
           {% endfor %}
         {% else %}

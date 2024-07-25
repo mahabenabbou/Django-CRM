@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .text-custom2 {
+        color: rgb(1, 1, 50); /* Dark blue text color */
+    }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .card-costum {
+        color: rgb(218, 109, 6);
+        background-color: rgb(1, 1, 50);
+        line-height: 3cap;
+    }
+    .text-custom {
+        color: rgb(218, 109, 6); /* Dark blue text color */
+    }
+    .buttons-custom2 {
+        background-color: rgb(1, 1, 50); /* Transparent background */
+        border: 2px solid rgb(1, 1, 50); /* Blue border */
+        color: rgb(255, 255, 255);
+    }
+</style>
+
+<h1>
+    <a class="navbar-brand text-custom2" href="{% url 'updateContactLog' pk %}">Update an ContactLog</a>
+</h1>
+<form class="text-custom2" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button type="submit" class="btn buttons-custom2">Update</button>
+</form>
+{% endblock %}

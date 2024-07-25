@@ -40,18 +40,31 @@
   .table-custom tr:hover {
       background-color: rgb(30, 30, 70); /* Hover effect for rows */
   }
+  .buttons-custom2 {
+      background-color: rgb(1, 1, 50); /* Dark blue background */
+      color: #ffffff; /* White text color */
+  }
+  .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  }
+
   </style>
 
 
-<h1>
+<h1 class="header">
   <a class="navbar-brand text-custom2" href="{% url 'tasks' %}">Tasks</a>
+  {% if user.is_authenticated and user.is_staff %}
+    <a href="{% url 'addTask' %}" class="btn buttons-custom2 me-3">Add</a>
+  {% endif %}
   </h1>
 
     <table id="task" class="table table-bordered table-striped table-custom">
       <thead>
         <tr>
-          <th scope="col">Created At</th>
           <th scope="col">Title</th>
+          <th scope="col">Created At</th>
           <th scope="col">Description</th>
           <th scope="col">Assigned_To</th>
           <th scope="col">Due Date</th>
@@ -65,8 +78,8 @@
         {% if tasks %}
           {% for task in tasks %}
             <tr>
+              <td><a class="text-custom" href="{% url 'moreinfoTask' task.id %}">{{ task.title }}</a></td>
               <td>{{ task.created_at }}</td>
-              <td>{{ task.title }}</td>
               <td>{{ task.description }}</td>
               <td>{{ task.assigned_to }}</td>
               <td>{{ task.due_date }}</td>
